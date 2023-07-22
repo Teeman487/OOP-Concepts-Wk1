@@ -1,0 +1,224 @@
+A.   The four Pillars of OOP are encapsulation, abstraction, inheritance, and polymorphism,
+(including Interface, Aggregation, Composition)
+
+class ---> collection of variables and methods; Animal(class)-Logical entity---> dog, cat,
+cow [known as objects]--physical entities( contain attributes(variables) and behaviors(methods))
+
+object --> is an instance of a class
+method --> block of code which contains a logic
+
+1) main() method can be present in a same class
+2) main() method can be present in a separate class
+
+class variables
+.............
+We can assign values to variables in 3 ways
+i) By using reference variable
+2) By using method
+3) By using constructor
+
+Constructor
+--------------
+1) Constructor is a special type of a method
+2) Constructor used for initilizing class variables
+3) Constructor Name should be same as class name
+4) Constructor will not return any value(not even void)
+5) Constructor will be invoked at the time of object creation.
+
+Method --> Block of code
+-------
+1)Case1- not taking parameters and also not returned any value
+2)Case2- not taking parameters but returning value
+3)Case3- taking parameters, but not returning any value
+4)Case4- method is taking parameters and also returning a value
+
+2 Types Constructor
+----------------
+1) Default constructor
+2) Parameterized constructor
+
+Difference btwn Method & Constructor
+1. Method name can be anything | Constructor name must be same as class name.
+2. Method can return a value | Constructor doesnt return a value
+3. Need to call method explicitly(cm2.display) | Automatically invoked at the time of object creation
+4. wriring logic allowed | initilizing variables or values
+
+Overloading_Static_ThisKey
+this keyword
+Static variables & static methods
+--------------------------------------------------
+Polymorphism: Performing a single action in different ways inorder to eliminate possible errors
+(from users); to convince the customer to draw e.g shape, triangle, rectangle in different ways
+
+Compile-time|Method Overloading Polymorphism:
+Runtime|Overriding Polymorphism:
+
+overloading: creating methods/constructors with the same name with different parameters.
+Advantage:
+-------
+saves memory
+saves time
+
+Consideration for Overloading_Static_ThisKey
+1)Number of parameters
+2) data type of parameters
+
+constructor overloading
+
+this keyword
+static ---> applicable for variables and methods
+
+static variables
+static methods
+------------------------
+
+1)
+2) static methods can also access non static stuff but through object
+3) Non static methods can access both static & non static stuff
+
+System.out.println()
+---------------------------
+class Test
+{
+static String s ="welcome";
+}
+
+Test.s.length(); --->7
+
+class System
+{
+  static printStream out;
+}
+
+System.out.println("testing") // println is a method for out variable
+System.out.print("testing")
+
+Java Inheritance
+Method Overriding
+super Keyword
+final Keyword
+--------------
+Inheritance: Aquiring all the properties & behavior(method) from one class  to another class.
+
+Parent/base class/super class ---> Child class/sub class/derived class
+
+5 Types of Inheritance
+-----------------
+1) Single -- A to B
+2) Multilevel ---A to B to C
+3) Hierarchical --- A(Parent class) B C D(independent)
+---------------(Extends concept)
+4) Multiple--- A-B to C
+5) Hybrid -- Combination of Hierarchical + Multiple
+----------------(Interface concept-Implements)
+
+Overloading_Static_ThisKey|Method Overriding Differences
+Overloading_Static_ThisKey:number of parameters & data type should be different to uniquely identify
+the methods(change the definition of the method)| Overriding: definition of the method should be same
+
+Method Overriding
+---------------------
+Rewrite the methods(initially in Parent class) in child classes.
+    1) method definition should be same
+    2) body should be changed
+
+super Keyword
+---------------
+1) super can be used to refer immediate parent clas instance variable.
+2) super can be used to invoke immediate parent class method
+3) super() can be used to invoke immediate parent class constructor.
+
+final: is a constant, we cant change variable
+-------------
+final int a=10;
+a=20;
+variable ---> you cannot change the value of the variable
+method --> method cannot be overrid in the child class
+ class  --> class cannot extend into another
+
+Java Arrays & Strings
+int a =10;
+a=20
+Array: is collection of elements of same data type
+int a[]= new int[5]
+2 types of arrays
+i.Single dimensional: only one row
+......................
+1) Declare an array: int a[] = new int[5] or int []a = new int [5]
+2) insert values into array
+3) Find size of an array
+4) Read values from an array: using Advanced for loop or Enhanced for loop or for each loop(specially defined for Arrays & HashMap concepts)
+
+ii. Two/multi dimensional: row & columns
+........................
+1) Declare an array:
+2) insert values into array
+3) Find size of an array(rows,columns)
+4) Read values from an array: using Advanced for loop/Enhanced for loop/ for each loop(specially defined for Arrays & HashMap concepts)
+
+int a [][]=new int[3][2];  // 3--> rows  2--> columns
+int [][]a[=new int[3][2];
+
+String: is a collection of characters.
+String s="welcome"
+
+String methods
+-------------
+s.length()
+
+
+
+---------------------------------------------
+
+Java Interfaces
+Java Packages
+Access Modifiers
+-------------------
+
+Interface
+--------------
+An interface in java is a blueprint of a class.
+Interface contains finaland static variables.
+Interface contains abstract methods.
+An abstract method is a method contains definition but not body.
+Methods in interface are publicly bydefault.
+Interface supports the functionality of multiple inheritance.
+We can define interface with interface with interface keyword.
+A class extends another class, an interface extends another interface but a class implememts an interface.
+We can create Object reference for Interface but we cannot instantiate interface.
+
+public
+default
+protected
+private
+
+package is collection of classes/interfaces/other files.
+
+import
+
+create sub package
+
+2 types of packages
+-----
+1) user defined packages -- created by us
+2) built-in packages -- java.util --
+
+Access Modifiers: Defines the scope of variables and methods
+------------
+1)public
+2) protected
+3) default
+4) private
+
+private : accessible only within class.
+Default:
+If you dont use any modifier, it is treated as default by default. The default modifier is accessible only within package
+
+protected:
+The protected access modifier is accessible within package and (outside the package but through inheritance only)
+
+
+
+
+
+

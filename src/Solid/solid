@@ -1,0 +1,235 @@
+ SOLID
+   SOLID PRINCIPLES
+  i. Single Responsibility: Each class
+should have only one sole purpose,
+and not be filled with excessive functionality
+
+ii. Open Closed
+  Classes should be open for extension,
+closed for modification.
+In other words, you should not have to rewrite
+an existing class for implementing
+new features.
+
+iii. Liskov Substitution
+   This means that every subclass or derived class should be substituable
+for their base or parent class.
+
+iv Interface Segregation
+  Interfaces should not force classes to implement what they cant do.
+Large interfaces should be divided into small ones.
+
+v. Dependency Inversion
+  Components should depend on abstrctions, not on concretions.
+
+
+import java.util.List;
+
+public class AreaCalculator implements IAreaCalculator {
+   // public int sum(List<Object>shapes) {
+   @Override
+   public int sum(List<Shape> shapes) {
+        int sum =0;
+        for (int i = 0; i<shapes.size(); i++) {
+            //Object shape = shapes.get(i);
+            Shape shape = shapes.get(i);
+            sum+= shape.area();
+            /*if(shape instanceof Square) {
+                    sum += Math.pow(((Square) shape).getLength(), 2);
+        }
+        if (shape instanceof  Circle) {
+            sum+= Math.PI * Math.pow(((Circle) shape).getRadius(), 2);
+        }
+        if (shape instanceof Cube) {
+
+        }*/
+
+
+    }
+    return sum;
+    }
+
+    /*public String json(List<Object>shapes) {
+        return  "{sum: %s}".formatted(sum(shapes));
+    }
+
+    public String csv(List<Object>shapes) {
+        return  "sum, %s".formatted(sum(shapes));
+    }*/
+
+
+}
+
+
+
+
+
+
+
+public class Circle implements Shape {
+    private  final int radius;
+    public Circle(int radius) {
+        this.radius=radius;
+    }
+    public  int getRadius() {
+        return  radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * Math.pow(getRadius(), 2);
+    }
+}
+
+
+
+
+
+
+public class Square implements Shape {
+    private  final int length;
+    public  Square(int length) {this.length = length;}
+    public  int getLength() {return length; }
+
+    @Override
+    public double area() {
+        return Math.pow(getLength(), 2);
+    }
+}
+
+
+
+
+public class Rectangle implements  Shape {
+
+    @Override
+    public double area() {return  20;}
+
+
+        public double volume() {
+            return 0;
+    }
+}
+
+
+
+public interface Shape {
+    double area();
+    //double volume();
+}
+
+
+
+
+
+import java.util.List;
+
+public class ShapesPrinter {
+
+    private  final IAreaCalculator areaCalculator;
+
+    public ShapesPrinter(IAreaCalculator areaCalculator) {
+        this.areaCalculator = areaCalculator;
+    }
+    /*private  AreaCalculator areaCalculator
+= new AreaCalculator (); */
+
+    public String json(List<Shape> shapes) {
+        return  "{shapesSum: %s}".formatted(areaCalculator.sum(shapes));
+    }
+    /*public String json(int sum) {return  "{shapesSum: %s}".formatted(sum);
+    }*/
+
+    public String csv(List<Shape> shapes) {
+        return  "shapes_sum, %s".formatted(shapes);
+    }
+    /*public String csv(int sum) {
+        return  "shapes_sum, %s".formatted(sum);
+    }*/
+}
+
+
+
+
+public class Square implements Shape {
+    private  final int length;
+    public  Square(int length) {this.length = length;}
+    public  int getLength() {return length; }
+
+    @Override
+    public double area() {
+        return Math.pow(getLength(), 2);
+    }
+}
+
+
+
+public class ThreeDimensionalShape {
+}
+
+
+
+
+public class Cube extends ThreeDimensionalShape implements Shape {
+    @Override
+    public double area() {
+        return 100;
+    }
+}
+
+
+
+import java.util.List;
+
+public interface IAreaCalculator {
+    // public int sum(List<Object>shapes) {
+    int sum(List<Shape> shapes);
+}
+
+
+
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+
+        IAreaCalculator areaCalculator = new AreaCalculator();
+        //AreaCalculator areaCalculator = new AreaCalculator();
+        Circle circle = new Circle(10);
+        Square square = new Square(10);
+        Cube cube = new Cube ();
+        Rectangle rectangle = new Rectangle();
+        ShapesPrinter printer = new ShapesPrinter(areaCalculator);
+        //NoShape noShape = new NoShape();
+        Shape noShape = new NoShape();
+        //List<Object> shapes = List.of(circle, square);
+        //List<Shape> shapes = List.of(circle, square);
+        //List<Shape> shapes = List.of(circle, square, cube);
+        //List<Shape> shapes = List.of(circle, square, cube,rectangle);
+       // List<Shape> shapes = List.of(noShape,circle, square, cube,rectangle);
+        List<Shape> shapes = List.of(circle, square, cube,rectangle);
+
+        int sum = areaCalculator.sum(shapes);
+       // System.out.println("sum = " + sum);
+        //System.out.println(areaCalculator.json(shapes));
+        //System.out.println(printer.json(sum));
+        System.out.println(printer.json(shapes));
+       // System.out.println(areaCalculator.csv(shapes));
+       // System.out.println(printer.csv(sum));
+        System.out.println(printer.csv(shapes));
+
+
+    }
+}
+
+
+
+
+public class NoShape implements Shape {
+
+    @Override
+    public double area() {
+        throw new IllegalStateException("Cannot calculate area");
+
+    }
+}

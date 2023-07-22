@@ -1,0 +1,276 @@
+4.   ACCESS MODIFIERS
+         Access Levels
+  Modifier     Class   Package Subclass   World
+  public         Y      Y       Y          Y
+  protected      Y      Y       Y          N
+  no modifier    Y      Y       N          N
+  private        Y      N       N          N
+
+Package1:
+package Package1;
+
+import Package2.C;
+
+public class A extends C {
+    public static void main(String[] args) {
+
+        C c = new C();
+        System.out.println(c.publicMessage);
+        System.out.println(c.defaultMessage);
+        System.out.println(c.publicMessage);
+
+        A a = new A(); // Since A is a subclass of C, A is instantiated instead, A will locate C
+        System.out.println(a.protectedMessage);
+
+    }
+}
+
+
+
+package Package1;
+
+
+public class B {
+    public static void main(String[] args) {
+
+    }
+}
+
+
+
+Package2:
+
+package Package2;
+
+//public class C {
+public class C {
+
+    // Variables
+    protected String protectedMessage = "This is protected";
+    public  String publicMessage ="This is public";
+    public String defaultMessage = "This is the deafult";
+
+}
+
+
+
+package Package2;
+
+import Package1.A;
+public class Asub extends A {
+    public static void main(String[] args) {
+
+        C c = new C();
+        Asub sub = new Asub();
+        System.out.println("First=== " + sub.protectedMessage);
+        System.out.println("Second===" + c.protectedMessage);
+       
+ /*System.out.println(c.defaultMessage);
+        System.out.println(c.publicMessage);*/
+
+    }
+}
+
+
+
+
+4.  this and super keyword, final and static
+    Static = modifier: A single copy of variable/method
+     is created and shared.
+     The class owns the Static member.
+
+ public class Friend {
+    String name;
+    static int numberOfFriends;
+
+    //Constructor
+
+    Friend(String name) {
+        this.name = name;
+        numberOfFriends++; // recognized as integer or numeric; numberOfFriend++ similar to numberOfFriend+=1
+    }
+
+    static void displayFriends() {
+        System.out.println("You have" + numberOfFriends + "friends");
+    }
+}
+
+
+
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        //Instantiate
+        Friend friend1 = new Friend("Toheeb");
+        Friend friend2 = new Friend("faiz");
+        Friend friend3 = new Friend("fashola");
+        Friend friend4 = new Friend("rash");
+        Friend.displayFriends();
+    }
+}
+
+
+5. Abstract: Abstract classes cannot be instantiated, but they can have
+a subclass. 
+Abstract methods are declared without an implementation
+
+
+public abstract class Vehicle {
+    // abstract is too generic, not specified
+    abstract void go();
+}
+
+
+public class Car extends Vehicle {
+
+    @Override
+    void go() {
+        System.out.println("He is driving the car");
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+
+       // Vehicle vehicle = new Vehicle() // It secures your program
+        Car car = new Car ();
+        car.go();
+    }
+}
+
+
+6..  Interface: A template that can be applied to a class. 
+similar to inheritance, but specifies what a class has/must do.
+Classes can apply more than one interface, inheritance is limited to super.
+
+  
+public interface Predator {
+    void hunt();
+}
+
+
+public interface Prey {
+    void flee();
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        Rabbit rabbit = new Rabbit();
+        rabbit.flee();
+        Hawk hawk = new Hawk();
+        hawk.hunt();
+        Fish fish = new Fish();
+        fish.hunt();
+        fish.flee();
+    }
+}
+
+
+public class Fish implements Prey, Predator{
+    @Override
+    public void hunt() {
+        System.out.println("The fish is hunting the smaller fish");
+    }
+
+    @Override
+    public void flee() {
+        System.out.println("The fish is fleeing from a larger fish");
+
+    }
+}
+
+
+public class Hawk implements Predator {
+    @Override
+    public void hunt() {
+        System.out.println("The Hawk is hunting");
+    }
+}
+
+
+public class Rabbit implements Prey {
+    //Actions of Prey
+    @Override
+    public void flee() {
+        System.out.println("The rabbit is fleeing");
+
+    }
+}
+
+
+
+7.  String: a reference data type that can store one or more
+
+characters. reference data types have access to useful methods
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        String name = " Bro";
+
+      // boolean result = name.equalsIgnoreCase("bRo");
+        //int result = name.length();
+        //char result  = name.charAt(2);
+       // int result = name.indexOf("B");
+        //Boolean result = name.isEmpty();
+       // String result = name.toUpperCase();
+        //String result = name.toLowerCase();
+        //String result = name.trim();
+        String result = name.replace('o', 'a');
+
+        System.out.println(result);
+
+    }
+
+}
+
+
+8. Unit Testing
+
+
+9. Intro to Exception handling
+   Exception: an event that occurs during the execution of a program that,
+disrupts the normal flow of instructions.
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            //Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a whole number to divide: ");
+            int x = scanner.nextInt();
+
+            System.out.println("Enter a whole number to divide by: ");
+            int y = scanner.nextInt();
+            int z = x / y;
+
+            System.out.println("result: " + z);
+        }
+        catch(ArithmeticException e){
+            System.out.println("You can't divide by zero!");
+        }
+        catch ( InputMismatchException e) {
+            System.out.println("PLEASE ENTER A NUMBER");
+        }
+        catch (Exception e){ // catches all exceptions
+
+        }
+       /* finally {
+            System.out.println("This will alwways print"); // It will execute regardless of catching exceptions
+        }*/
+        finally{
+            scanner.close();
+
+        }
+    }
+}
